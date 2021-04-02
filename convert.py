@@ -13,8 +13,11 @@ if not os.path.isdir(os.path.join(path,'Output')):
 file_list = os.listdir(os.path.join(path,'Input'))
 
 for file in tqdm(file_list, disable=not len(file_list), unit='Image', desc="Convert"):
-    file_path = os.path.join(path,'Input',file)
-    file_destination = os.path.join(path,'Output',file.rsplit('.')[0]+'.webp')
+    try:
+        file_path = os.path.join(path,'Input',file)
+        file_destination = os.path.join(path,'Output',file.rsplit('.')[0]+'.webp')
 
-    img = Image.open(file_path)
-    img.save(file_destination, format = "WebP", lossless = True)
+        img = Image.open(file_path)
+        img.save(file_destination, format = "WebP", lossless = True)
+    except:
+        print(f"\nFile {file} can't be converted!")
